@@ -37,7 +37,6 @@ public class CatalogActivity extends AppCompatActivity implements
     /** Identifier for the pet data loader */
     private static final int PRODUCT_LOADER = 0;
 
-    private EditText mQuantityEditText;
 
     /** Adapter for the ListView */
     InventoryCursorAdapter mCursorAdapter;
@@ -179,11 +178,14 @@ public class CatalogActivity extends AppCompatActivity implements
 
     public void sale(View view) {
         // Setup the item click listener
-        int quantity = Integer.parseInt(mQuantityEditText.getText().toString());
-        quantity--;
+
 
                 int position = productListView.getPositionForView(view);
                 Uri positionUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, position);
+        String sth = positionUri.getQueryParameter(ProductEntry.COLUMN_PRODUCT_QUANTITY);
+        int quantity = Integer.parseInt(sth);
+        quantity--;
+
         ContentValues values = new ContentValues();
         values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, quantity);
         getContentResolver().update(positionUri, values, null, null);

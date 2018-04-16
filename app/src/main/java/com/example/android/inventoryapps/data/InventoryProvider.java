@@ -137,7 +137,7 @@ public class InventoryProvider extends ContentProvider {
             throw new IllegalArgumentException("Product requires price.");
         }
 
-        Integer quantity = values.getAsInteger(InventoryContract.ProductEntry.COLUMN_PRODUCT_QUANTITY);
+        int quantity = values.getAsInteger(InventoryContract.ProductEntry.COLUMN_PRODUCT_QUANTITY);
 
         String supplierName = values.getAsString(InventoryContract.ProductEntry.COLUMN_SUPPLIER_NAME);
 
