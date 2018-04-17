@@ -54,7 +54,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         final int prodQuant = Integer.parseInt(productQuantity);
 
         if (TextUtils.isEmpty(productQuantity)) {
-            productQuantity = "0";
+            productQuantity = context.getString(R.string.default_quantity);
         }
 
 
@@ -74,9 +74,9 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
                     int newUpdate = context.getContentResolver().update(currentUri, values, null, null);
                     if (newUpdate == 0)
-                        Toast.makeText(context, "Error in updating", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.error_update, Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(context, "Quantity cannot be below 0", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.quantity_below_zero, Toast.LENGTH_SHORT).show();
             }
         });
 

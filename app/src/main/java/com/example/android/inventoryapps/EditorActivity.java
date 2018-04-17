@@ -158,23 +158,23 @@ public class EditorActivity extends AppCompatActivity implements
 
         ContentValues values = new ContentValues();
         if (TextUtils.isEmpty(nameString)) {
-            mNameEditText.setError("You must put product name!");
+            mNameEditText.setError(getString(R.string.put_product_name));
             checkSum = 1;
         }
         values.put(InventoryContract.ProductEntry.COLUMN_PRODUCT_NAME, nameString);
         if (TextUtils.isEmpty(priceString)) {
-            mPriceEditText.setError("Product has to have price");
+            mPriceEditText.setError(getString(R.string.put_product_price));
             checkSum = 1;
         }
         values.put(ProductEntry.COLUMN_PRODUCT_PRICE, priceString);
         values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, quantityString);
         if (supplierNameString.isEmpty()) {
-            mSupplierNameEditText.setError("Supplier name can't be empty");
+            mSupplierNameEditText.setError(getString(R.string.enter_supplier_name));
             checkSum = 1;
         }
         values.put(ProductEntry.COLUMN_SUPPLIER_NAME, supplierNameString);
         if (supplierNumberString.isEmpty()) {
-            mSupplierNumberEditText.setError("You must put supplier number!");
+            mSupplierNumberEditText.setError(getString(R.string.put_supplier_number));
             checkSum = 1;
         }
         values.put(ProductEntry.COLUMN_SUPPLIER_NUMBER, supplierNumberString);

@@ -40,14 +40,14 @@
             <EditText
                 android:id="@+id/edit_product_name"
                 style="@style/EditorFieldStyle"
-                android:hint="@string/hint_pet_name"
+                android:hint="@string/hint_product_name"
                 android:inputType="textCapWords" />
 
             <!-- Breed field -->
             <EditText
                 android:id="@+id/edit_product_price"
                 style="@style/EditorFieldStyle"
-                android:hint="Price"
+                android:hint="@string/hint_price"
                 android:inputType="textCapWords" />
 
             <LinearLayout
@@ -58,20 +58,20 @@
                     android:id="@+id/decrease"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-" />
+                    android:text="@string/decrease_button" />
 
                 <EditText
                     android:id="@+id/edit_product_quantity"
                     style="@style/EditorFieldStyle"
                     android:gravity="center"
-                    android:hint="Quantity"
+                    android:hint="@string/hint_quantity"
                     android:inputType="number" />
 
                 <Button
                     android:id="@+id/increase"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+" />
+                    android:text="@string/increase_button" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -87,7 +87,7 @@
         <!-- Label -->
         <TextView
             style="@style/CategoryStyle"
-            android:text="Supplier" />
+            android:text="@string/label_supplier" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -100,7 +100,7 @@
             <EditText
                 android:id="@+id/edit_supplier_name"
                 style="@style/EditorFieldStyle"
-                android:hint="Supplier name"
+                android:hint="@string/hint_supplier_name"
                 android:inputType="textCapWords" />
 
             <!-- Breed field -->
@@ -117,5 +117,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Order" />
+        android:text="@string/order" />
 </LinearLayout>
