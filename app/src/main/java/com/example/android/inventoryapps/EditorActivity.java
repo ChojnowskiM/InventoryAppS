@@ -113,7 +113,10 @@ public class EditorActivity extends AppCompatActivity implements
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
+                int quantity = 0;
+                if (!TextUtils.isEmpty(mQuantityEditText.getText().toString())) {
+                    quantity = Integer.parseInt(mQuantityEditText.getText().toString());
+                }
                 quantity++;
                 mQuantityEditText.setText("" + quantity);
             }
@@ -122,7 +125,10 @@ public class EditorActivity extends AppCompatActivity implements
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
+                int quantity = 0;
+                if (!TextUtils.isEmpty(mQuantityEditText.getText().toString())) {
+                    quantity = Integer.parseInt(mQuantityEditText.getText().toString());
+                }
                 if (quantity > 0) {
                     quantity--;
                 }
@@ -148,7 +154,7 @@ public class EditorActivity extends AppCompatActivity implements
         String supplierNameString = mSupplierNameEditText.getText().toString().trim();
         String supplierNumberString = mSupplierNumberEditText.getText().toString().trim();
 
-
+        checkSum = 0;
         if (mCurrentProductUri == null &&
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
                 TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierNameString) && TextUtils.isEmpty(supplierNumberString)) {
@@ -160,22 +166,26 @@ public class EditorActivity extends AppCompatActivity implements
         if (TextUtils.isEmpty(nameString)) {
             mNameEditText.setError(getString(R.string.put_product_name));
             checkSum = 1;
+            return;
         }
         values.put(InventoryContract.ProductEntry.COLUMN_PRODUCT_NAME, nameString);
         if (TextUtils.isEmpty(priceString)) {
             mPriceEditText.setError(getString(R.string.put_product_price));
             checkSum = 1;
+            return;
         }
         values.put(ProductEntry.COLUMN_PRODUCT_PRICE, priceString);
         values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, quantityString);
         if (supplierNameString.isEmpty()) {
             mSupplierNameEditText.setError(getString(R.string.enter_supplier_name));
             checkSum = 1;
+            return;
         }
         values.put(ProductEntry.COLUMN_SUPPLIER_NAME, supplierNameString);
         if (supplierNumberString.isEmpty()) {
             mSupplierNumberEditText.setError(getString(R.string.put_supplier_number));
             checkSum = 1;
+            return;
         }
         values.put(ProductEntry.COLUMN_SUPPLIER_NUMBER, supplierNumberString);
 
@@ -183,6 +193,11 @@ public class EditorActivity extends AppCompatActivity implements
 
         if (!TextUtils.isEmpty(quantityString)) {
             quantity = Integer.parseInt(quantityString);
+        }
+        if (quantityString.isEmpty()) {
+            mQuantityEditText.setError(getString(R.string.quantity_error));
+            checkSum = 1;
+            return;
         }
         values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, quantity);
 

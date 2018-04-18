@@ -73,5 +73,6 @@
     <string name="put_product_price">Product has to have price</string>
     <string name="enter_supplier_name">Supplier name can\'t be empty</string>
     <string name="put_supplier_number">You must put supplier number!</string>
+    <string name="quantity_error">You must insert quantity</string>
 
 </resources>
