@@ -24,22 +24,16 @@ import android.widget.Toast;
 import com.example.android.inventoryapps.data.InventoryContract;
 import com.example.android.inventoryapps.data.InventoryContract.*;
 
-
 public class EditorActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-
     private static final int EXISTING_PRODUCT_LOADER = 0;
-
 
     private Uri mCurrentProductUri;
 
-
     private EditText mNameEditText;
 
-
     private EditText mPriceEditText;
-
 
     private EditText mQuantityEditText;
 
@@ -51,9 +45,7 @@ public class EditorActivity extends AppCompatActivity implements
 
     private int checkSum = 0;
 
-
     private boolean mProductHasChanged = false;
-
 
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
@@ -68,25 +60,20 @@ public class EditorActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
-
         Intent intent = getIntent();
         mCurrentProductUri = intent.getData();
-
 
         if (mCurrentProductUri == null) {
 
             setTitle(getString(R.string.editor_activity_title_new_pet));
-
 
             invalidateOptionsMenu();
         } else {
 
             setTitle(getString(R.string.editor_activity_title_edit_pet));
 
-
             getLoaderManager().initLoader(EXISTING_PRODUCT_LOADER, null, this);
         }
-
 
         mNameEditText = findViewById(R.id.edit_product_name);
         mPriceEditText = findViewById(R.id.edit_product_price);
@@ -108,7 +95,6 @@ public class EditorActivity extends AppCompatActivity implements
                 }
             }
         });
-
 
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +122,6 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
 
-
         mNameEditText.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
@@ -144,7 +129,6 @@ public class EditorActivity extends AppCompatActivity implements
         mSupplierNumberEditText.setOnTouchListener(mTouchListener);
 
     }
-
 
     private void saveProduct() {
 
@@ -201,11 +185,9 @@ public class EditorActivity extends AppCompatActivity implements
         }
         values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, quantity);
 
-
         if (mCurrentProductUri == null) {
 
             Uri newUri = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
-
 
             if (newUri == null) {
 
@@ -219,7 +201,6 @@ public class EditorActivity extends AppCompatActivity implements
         } else {
 
             int rowsAffected = getContentResolver().update(mCurrentProductUri, values, null, null);
-
 
             if (rowsAffected == 0) {
 
@@ -240,7 +221,6 @@ public class EditorActivity extends AppCompatActivity implements
         getMenuInflater().inflate(R.menu.menu_editor, menu);
         return true;
     }
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -281,7 +261,6 @@ public class EditorActivity extends AppCompatActivity implements
                     return true;
                 }
 
-
                 DialogInterface.OnClickListener discardButtonClickListener =
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -291,13 +270,11 @@ public class EditorActivity extends AppCompatActivity implements
                             }
                         };
 
-
                 showUnsavedChangesDialog(discardButtonClickListener);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -307,7 +284,6 @@ public class EditorActivity extends AppCompatActivity implements
             return;
         }
 
-
         DialogInterface.OnClickListener discardButtonClickListener =
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -316,7 +292,6 @@ public class EditorActivity extends AppCompatActivity implements
                         finish();
                     }
                 };
-
 
         showUnsavedChangesDialog(discardButtonClickListener);
     }
@@ -331,7 +306,6 @@ public class EditorActivity extends AppCompatActivity implements
                 ProductEntry.COLUMN_PRODUCT_QUANTITY,
                 ProductEntry.COLUMN_SUPPLIER_NAME,
                 ProductEntry.COLUMN_SUPPLIER_NUMBER};
-
 
         return new CursorLoader(this,
                 mCurrentProductUri,
@@ -348,7 +322,6 @@ public class EditorActivity extends AppCompatActivity implements
             return;
         }
 
-
         if (cursor.moveToFirst()) {
 
             int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_NAME);
@@ -357,13 +330,11 @@ public class EditorActivity extends AppCompatActivity implements
             int supplierNameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_SUPPLIER_NAME);
             int supplierNumberColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_SUPPLIER_NUMBER);
 
-
             String name = cursor.getString(nameColumnIndex);
             Double price = cursor.getDouble(priceColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
             String supplierName = cursor.getString(supplierNameColumnIndex);
             String supplierNumber = cursor.getString(supplierNumberColumnIndex);
-
 
             mNameEditText.setText(name);
             mPriceEditText.setText(Double.toString(price));
@@ -384,7 +355,6 @@ public class EditorActivity extends AppCompatActivity implements
         mSupplierNameEditText.setText("");
     }
 
-
     private void showUnsavedChangesDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
 
@@ -400,11 +370,9 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
 
-
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
 
     private void showDeleteConfirmationDialog() {
 
@@ -425,18 +393,15 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
 
-
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
 
     private void deleteProduct() {
 
         if (mCurrentProductUri != null) {
 
             int rowsDeleted = getContentResolver().delete(mCurrentProductUri, null, null);
-
 
             if (rowsDeleted == 0) {
 
@@ -448,7 +413,6 @@ public class EditorActivity extends AppCompatActivity implements
                         Toast.LENGTH_SHORT).show();
             }
         }
-
 
         finish();
     }

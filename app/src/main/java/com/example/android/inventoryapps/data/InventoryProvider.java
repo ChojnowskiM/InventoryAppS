@@ -25,10 +25,8 @@ public class InventoryProvider extends ContentProvider {
 
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PRODUCTS, PRODUCTS);
 
-
         sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_PRODUCTS + "/#", PRODUCT_ID);
     }
-
 
     private InventoryDbHelper mDbHelper;
 
@@ -44,9 +42,7 @@ public class InventoryProvider extends ContentProvider {
 
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
 
-
         Cursor cursor;
-
 
         int match = sUriMatcher.match(uri);
         switch (match) {
@@ -60,7 +56,6 @@ public class InventoryProvider extends ContentProvider {
                 selection = InventoryContract.ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
-
                 cursor = database.query(ProductEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
@@ -68,9 +63,7 @@ public class InventoryProvider extends ContentProvider {
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }
 
-
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
-
 
         return cursor;
     }
@@ -85,7 +78,6 @@ public class InventoryProvider extends ContentProvider {
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
     }
-
 
     private Uri insertProduct(Uri uri, ContentValues values) {
 
@@ -115,7 +107,6 @@ public class InventoryProvider extends ContentProvider {
 
         getContext().getContentResolver().notifyChange(uri, null);
 
-
         return ContentUris.withAppendedId(uri, id);
     }
 
@@ -135,7 +126,6 @@ public class InventoryProvider extends ContentProvider {
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
     }
-
 
     private int updateProduct(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
@@ -165,22 +155,17 @@ public class InventoryProvider extends ContentProvider {
             String supplierPhone = values.getAsString(ProductEntry.COLUMN_SUPPLIER_NUMBER);
         }
 
-
         if (values.size() == 0) {
             return 0;
         }
 
-
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-
         int rowsUpdated = database.update(InventoryContract.ProductEntry.TABLE_NAME, values, selection, selectionArgs);
-
 
         if (rowsUpdated != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-
 
         return rowsUpdated;
     }
@@ -189,7 +174,6 @@ public class InventoryProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-
 
         int rowsDeleted;
 
@@ -209,11 +193,9 @@ public class InventoryProvider extends ContentProvider {
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
 
-
         if (rowsDeleted != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-
 
         return rowsDeleted;
     }

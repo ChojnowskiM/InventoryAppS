@@ -24,7 +24,6 @@ import android.widget.Toast;
 import com.example.android.inventoryapps.data.InventoryContract;
 import com.example.android.inventoryapps.data.InventoryContract.*;
 
-
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
     private static final int PRODUCT_LOADER = 0;
@@ -38,7 +37,6 @@ public class CatalogActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,17 +46,13 @@ public class CatalogActivity extends AppCompatActivity implements
             }
         });
 
-
         productListView = findViewById(R.id.list);
-
 
         View emptyView = findViewById(R.id.empty_view);
         productListView.setEmptyView(emptyView);
 
-
         mCursorAdapter = new InventoryCursorAdapter(this, null);
         productListView.setAdapter(mCursorAdapter);
-
 
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,9 +62,7 @@ public class CatalogActivity extends AppCompatActivity implements
 
                 currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
 
-
                 intent.setData(currentProductUri);
-
 
                 startActivity(intent);
             }
@@ -79,7 +71,6 @@ public class CatalogActivity extends AppCompatActivity implements
 
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
     }
-
 
     private void insertProduct() {
 
@@ -90,10 +81,8 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(ProductEntry.COLUMN_SUPPLIER_NAME, "FSO");
         values.put(ProductEntry.COLUMN_SUPPLIER_NUMBER, "+48 501 501 501");
 
-
         Uri newUri = getContentResolver().insert(InventoryContract.ProductEntry.CONTENT_URI, values);
     }
-
 
     private void deleteAllProducts() {
         int rowsDeleted = getContentResolver().delete(InventoryContract.ProductEntry.CONTENT_URI, null, null);
@@ -131,7 +120,6 @@ public class CatalogActivity extends AppCompatActivity implements
                 InventoryContract.ProductEntry.COLUMN_PRODUCT_NAME,
                 ProductEntry.COLUMN_PRODUCT_PRICE,
                 ProductEntry.COLUMN_PRODUCT_QUANTITY};
-
 
         return new CursorLoader(this,
                 ProductEntry.CONTENT_URI,

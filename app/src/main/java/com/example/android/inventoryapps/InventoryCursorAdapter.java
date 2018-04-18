@@ -17,21 +17,17 @@ import android.widget.Toast;
 import com.example.android.inventoryapps.data.InventoryContract;
 import com.example.android.inventoryapps.data.InventoryContract.*;
 
-
 public class InventoryCursorAdapter extends CursorAdapter {
-
 
     public InventoryCursorAdapter(Context context, Cursor c) {
         super(context, c, 0 /* flags */);
     }
-
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
 
         return LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
     }
-
 
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
@@ -41,11 +37,9 @@ public class InventoryCursorAdapter extends CursorAdapter {
         TextView quantityTextView = view.findViewById(R.id.quantity);
         Button saleButton = view.findViewById(R.id.sale);
 
-
         int nameColumnIndex = cursor.getColumnIndex(InventoryContract.ProductEntry.COLUMN_PRODUCT_NAME);
         int priceColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_PRICE);
         int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_QUANTITY);
-
 
         String productName = cursor.getString(nameColumnIndex);
         String productPrice = cursor.getString(priceColumnIndex);
@@ -56,7 +50,6 @@ public class InventoryCursorAdapter extends CursorAdapter {
         if (TextUtils.isEmpty(productQuantity)) {
             productQuantity = context.getString(R.string.default_quantity);
         }
-
 
         nameTextView.setText(productName);
         priceTextView.setText(productPrice);
