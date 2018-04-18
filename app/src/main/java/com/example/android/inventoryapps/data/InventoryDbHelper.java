@@ -19,8 +19,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     public InventoryDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
-
+    
     @Override
     public void onCreate(SQLiteDatabase db) {
         String SQL_CREATE_PRODUCTS_TABLE = "CREATE TABLE " + InventoryContract.ProductEntry.TABLE_NAME + " ("
